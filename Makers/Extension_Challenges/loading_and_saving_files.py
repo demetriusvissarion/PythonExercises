@@ -55,13 +55,73 @@ def christmas_day_air_quality(filename, include_header_row):
 
 
 
-print(christmas_day_air_quality("AirQuality.csv", True))
+# print(christmas_day_air_quality("AirQuality.csv", True))
 #   Returns:
 #     Date;Time;CO(GT);PT08.S1(CO);NMHC(GT);C6H6(GT);PT08.S2(NMHC);[...]
 #     25/12/2004;00.00.00;5,9;1505;-200;15,6;1168;567;525;169;1447;[...]
 #     [...]
 
-print(christmas_day_air_quality("AirQuality.csv", False))
+# print(christmas_day_air_quality("AirQuality.csv", False))
 #   Returns:
 #     25/12/2004;00.00.00;5,9;1505;-200;15,6;1168;567;525;169;1447;[...]
 #     [...]
+
+
+
+def christmas_day_average_air_quality(filename):
+    my_list = christmas_day_air_quality(filename, True)
+    # split lines into list of strings by ";"
+    list_of_lists = []
+    counter = 0
+    while counter < len(my_list):
+        row_split = my_list[counter].split(';')
+        list_of_lists.append(row_split)
+        counter += 1
+
+    # take every 4th item in each line list and put it into new list
+    ave_list = []
+    counter_2 = 1
+    while counter_2 < len(list_of_lists):
+        ave_list.append(list_of_lists[counter_2][3])
+        counter_2 += 1
+    # return average of the new list
+    result = [eval(i) for i in ave_list]
+    print(result)
+    return round(sum(result) / len(result), 2)
+
+
+# print(christmas_day_average_air_quality("AirQuality.csv"))
+
+
+
+
+def get_averages_for_month(filename):
+    if does_file_exist(filename):
+        my_list = get_file_contents(filename)
+
+        # split string lines into list of lists by ";"
+        list_of_lists = []
+        counter = 1
+        while counter < len(my_list):
+            row_split = my_list[counter].split(';')
+            list_of_lists.append(row_split)
+            counter += 1
+
+        # filter data for each month
+        result = {key: [] for key in range(1, 13)}
+        for key in result:
+            for line in list_of_lists:
+                if int(line[0][3:5]) == key:
+                        result[key].append(int(line[3]))
+
+        # calculate the average for each month
+        for key, value in result.items():
+            if len(value) > 0:
+                average = round(sum(value) / len(value), 2)
+            result[key] = average
+    
+    return result
+
+
+print(get_averages_for_month("AirQuality.csv"))
+#   Returns: {1: 1003.47, [...], 12: 948.71}
