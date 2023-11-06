@@ -334,3 +334,279 @@
 # for number in [1, 2, 3, 4]:
 #     result.append(number * 2)
 # print(result)
+
+
+# friends = ["Will", "Bernie", "Garth", "Suze"]
+# card_suit = ["Spades", "Clubs", "Diamonds", "Hearts"]
+# import random
+# random_dict = {friend:random.choice(card_suit) for friend in friends}
+# print(random_dict)
+
+# # Or in a different way, to make sure there are no overlaps in card suit, 
+# # we can use zip() to put the two lists together:
+# friends = ["Will", "Bernie", "Garth", "Suze"]
+# card_suit = ["Spades", "Clubs", "Diamonds", "Hearts"]
+# from random import shuffle
+# shuffle(card_suit)
+# card_friends = {friend:card for (friend, card) in zip(friends, card_suit)}
+# print(card_friends)
+# {'Will': 'Hearts', 'Bernie': 'Spades', 'Garth': 'Diamonds', 'Suze': 'Clubs'}
+# shuffle(card_suit)
+# card_friends = {friend:card for (friend, card) in zip(friends, card_suit)}
+# print(card_friends)
+
+
+# class Calculator():
+#     def __init__(self):
+#         self.history = []
+#         self.last_calc = []
+#         return
+#     def add(self, number1, number2):
+#         result = number1 + number2
+#         self.last_calc.append(result)
+#         return result
+#     def multiply(self, number1, number2):
+#         result = number1 * number2
+#         self.last_calc.append(result)
+#         return result
+#     def subtract(self, number1, number2):
+#         result = number1 - number2
+#         self.last_calc.append(result)
+#         return result
+#     def divide(self, number1, number2):
+#         result = number1 / number2
+#         self.last_calc.append(result)
+#         return result
+#     def list_history(self):
+#         if len(self.history) > 0:
+#             result = [self.history] + [self.last_calc] 
+#             self.history = result
+#         else:
+#             result = self.last_calc
+#             self.history = result
+#         self.last_calc = []
+#         return self.history
+    
+
+# subject = Calculator()
+# print(subject.add(1, 2))
+# print(subject.multiply(3, 4))
+# print(subject.subtract(5, 6))
+# print(subject.divide(7, 8))
+# print(subject.list_history())
+# print(subject.add(1, 1))
+# print(subject.multiply(2, 17))
+# print(subject.subtract(1, -16))
+# print(subject.divide(40, 4))
+# print(subject.list_history())
+
+
+# class Person():
+#     def __init__(self, dict):
+#         self.dict = dict
+#     def get_work_address(self):
+#         return self.dict['addresses'][0]['building'] + ' ' + self.dict['addresses'][0]['street']
+#     def get_home_address(self):
+#         return self.dict['addresses'][1]['building'] + ' ' + self.dict['addresses'][1]['street']
+#     def get_pets(self):
+#         list_of_pets = self.dict['pets']
+#         result_string = self.dict['name'] + ' has '
+#         print('test1: ' + str(len(list_of_pets)))
+#         if len(list_of_pets) == 1:
+#             result_string + '1 pet: '
+#         elif len(list_of_pets) > 1:
+#             result_string += str(len(list_of_pets)) + ' pets: '
+#         else:
+#             result_string += 'no pets.'
+#         counter = 0
+#         for pet_dict in list_of_pets:
+#             if counter == 0:
+#                 result_string += 'a ' + pet_dict['animal'] + ' called ' + pet_dict['name']
+#             else:
+#                 result_string += ', a ' + pet_dict['animal'] + ' called ' + pet_dict['name']
+#             counter += 1
+        
+#         return result_string
+    
+# subject = Person({
+#     'name': 'Jo',
+#     'pets': [
+#         {'name': 'Paulo', 'animal': 'cat'},
+#         {'name': 'Edith', 'animal': 'dog'},
+#         {'name': 'Pawel', 'animal': 'goldfish'}
+#     ],
+#     'addresses': [
+#         {'name': 'work', 'building': '12', 'street': 'Whitehall'},
+#         {'name': 'home', 'building': '1', 'street': 'North Lane'}
+#     ]
+# })
+# print(subject.get_work_address())
+# print(subject.get_home_address())
+# print(subject.get_pets())
+
+#########################################
+# Methods:
+#   1. Name: __init__
+#      Arguments: none
+#   2. Name: add
+#      Purpose: add a password for a service IF it is valid, otherwise do nothing
+#      Arguments: one string representing a service name,
+#                 one string representing a password
+#      Returns: None
+#   3. Name: remove
+#      Purpose: remove a password for a service
+#      Arguments: one string representing a service name
+#      Returns: None
+#   4. Name: update
+#      Purpose: update a password for a service IF it is valid, otherwise do nothing
+#      Arguments: one string representing a service name,
+#                 one string representing a password
+#      Returns: None
+#   5. Name: list_services
+#      Arguments: none
+#      Returns: a list of all the services for which the user has a password
+#   6. Name: sort_services_by
+#      Arguments: A string, either 'service' or 'added_on',
+#                 (Optional) A string 'reverse' to reverse the order
+#      Returns: a list of all the services for which the user has a password
+#               in the order specified
+#   7. Name: get_for_service
+#      Arguments: one string representing a service name
+#      Returns: the password for the given service, or None if none exists
+#
+# A reminder of the validity rules:
+#   1. A password must be at least 8 characters long
+#   2. A password must contain at least one of the following special characters:
+#      `!`, `@`, `$`, `%` or `&`
+#
+# And a new rule: passwords must be unique (not reused in other services).
+#
+# Example usage:
+#   > password_manager = PasswordManager2()
+#   > password_manager.add('gmail', '12ab5!678')   # Valid password
+#   > password_manager.add('facebook', '$abc1234') # Valid password
+#   > password_manager.add('youtube', '3@245256')  # Valid password
+#   > password_manager.add('twitter', '12345678')  # Invalid password, so ignored
+#   > password_manager.get_for_service('facebook')
+#   '$abc1234'
+#   > password_manager.list_services()
+#   ['gmail', 'facebook', 'youtube']
+#   > password_manager.remove('facebook')
+#   > password_manager.list_services()
+#   ['gmail', 'youtube']
+#   > password_manager.update('gmail', '12345678')  # Invalid password, so ignored
+#   > password_manager.get_for_service('gmail')
+#   '12ab5!678'
+#   > password_manager.update('gmail', '%21321415')  # Valid password
+#   > password_manager.get_for_service('gmail')
+#   '%21321415'
+#   > password_manager.sort_services_by('service')
+#   ['gmail', 'youtube']
+#   > password_manager.sort_services_by('added_on', 'reverse')
+#   ['youtube', 'gmail']
+
+# There are many more examples possible but the above should give you a good
+# idea.
+
+
+# class PasswordManager():
+
+#     def __init__(self):
+#         self.service_passwords = {}
+    
+#     def is_valid(self, password):
+#         return len(password) > 7 and any(char in "!@$%&" for char in password)
+    
+#     def add(self, service_name, password):
+#         if self.is_valid(password):
+#             self.service_passwords[service_name] = password
+
+#     def get_for_service(self, service_name):
+#         return self.service_passwords.get(service_name, None)
+    
+#     def list_services(self):
+#         return list(self.service_passwords.keys())
+
+# date_t1 = now1.strftime("%d/%m/%Y %H:%M:%S")
+
+# from datetime import datetime
+# now1 = datetime.now()
+# # date_t1 = now1.strftime("%H:%M:%S")
+# import time
+# time.sleep(1)
+# now2 = datetime.now()
+# # date_t2 = now2.strftime("%H:%M:%S")
+
+# list = [now1, now2]
+# print(list)
+# print(list.sort(key=lambda date: datetime.strptime(date, "%H:%M:%S")))
+
+
+from datetime import datetime
+import time
+class PasswordManager2():
+    def __init__(self):
+        self.service_passwords = {}
+        self.service_passwords_time = {}
+
+    def is_valid(self, password):
+        values = list(self.service_passwords.values())
+        return len(password) > 7 and any(char in "!@$%&" for char in password) and password not in values
+    
+    def add(self, service_name, password):
+        # add a password for a service IF it is valid, otherwise do nothing
+        if self.is_valid(password):
+            self.service_passwords[service_name] = password
+            self.service_passwords_time[service_name] = {'password': password, 'added_on': datetime.now()}
+
+    def remove(self, service_name):
+        # remove a password for a service
+        self.service_passwords.pop(service_name)
+        self.service_passwords_time.pop(service_name)
+
+    def update(self, service_name, password):
+        # update a password for a service IF it is valid, otherwise do nothing
+        if self.is_valid(password):
+            self.service_passwords[service_name] = password
+            self.service_passwords_time[service_name]['password'] = password
+
+    def list_services(self):
+        # Returns: a list of all the services for which the user has a password
+        return list(self.service_passwords.keys())
+    
+    def sort_services_by(self, service_or_added_on, reverse = None):
+        # Returns: a list of all the services for which the user has a password
+        # in the order specified
+        if service_or_added_on == 'service' and reverse == None:
+            return sorted(list(self.service_passwords.keys()))
+        
+        elif service_or_added_on == 'service' and reverse:
+            return sorted(list(self.service_passwords.keys()), reverse=True)
+        
+        if service_or_added_on == 'added_on':
+            if reverse == None:
+                # sort service names by 'added_on'
+                self.service_passwords_time
+            else:
+                return list(self.service_passwords.keys()).reverse()
+            
+    def get_for_service(self, service_name):
+        # Returns: the password for the given service, or None if none exists
+        return self.service_passwords.get(service_name, None)
+    
+    def testing_1(self):
+        return 'self.service_passwords: ', self.service_passwords
+    def testing_2(self):
+        return 'self.service_passwords_time: ', self.service_passwords_time
+
+password_manager = PasswordManager2()
+password_manager.add('baidu', '%12345678')
+password_manager.add('acebook', '$12345678')
+password_manager.add('makersbnb', '$12345678')
+# print(password_manager.list_services())
+# print(password_manager.sort_services_by('service'))
+# print(password_manager.sort_services_by('service', 'reverse'))
+# print(password_manager.sort_services_by('added_on'))
+
+print(password_manager.testing_1())
+print(password_manager.testing_2())
