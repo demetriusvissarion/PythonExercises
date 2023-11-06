@@ -123,5 +123,40 @@ def get_averages_for_month(filename):
     return result
 
 
-print(get_averages_for_month("AirQuality.csv"))
+
+
+# print(get_averages_for_month("AirQuality.csv"))
 #   Returns: {1: 1003.47, [...], 12: 948.71}
+
+
+
+import shutil
+def create_march_data(filename):
+    if does_file_exist('AirQuality.csv'):
+        # my_list = get_file_contents(filename)
+        march_path = 'Makers/Extension_Challenges/AirQualityMarch.csv'
+    
+        # while WIP delete "AirQualityMarch.csv" so I can create it again
+        if does_file_exist(march_path):
+            os.remove(march_path)
+
+        # create copy of "AirQuality.csv" and call it "AirQualityMarch.csv"
+        src = filename
+        dst = march_path
+        shutil.copy(src,dst)
+
+        # In "AirQualityMarch.csv," delete all rows except for March
+        with open(march_path, 'r') as file_handle:
+            example_file_content = file_handle.readlines()
+
+        with open(march_path, 'w') as march_file:
+            # Write the header row
+            march_file.write(example_file_content[0])
+
+            # Write only the data rows for March
+            for line in example_file_content[1:]:
+                if "/03/" in line:
+                    march_file.write(line)
+
+
+print(create_march_data("Makers/Extension_Challenges/AirQuality.csv"))
