@@ -543,7 +543,6 @@
 
 
 from datetime import datetime
-import time
 class PasswordManager2():
     def __init__(self):
         self.service_passwords = {}
@@ -585,10 +584,22 @@ class PasswordManager2():
         
         if service_or_added_on == 'added_on':
             if reverse == None:
+                date_sorted = sorted(self.service_passwords_time, key=lambda key: self.service_passwords_time[key]['added_on'])
                 # sort service names by 'added_on'
-                self.service_passwords_time
+                result = []
+                for key in date_sorted:
+                    result.append(key)
+                return result
+                # return key, self.service_passwords_time[key]
+
             else:
-                return list(self.service_passwords.keys()).reverse()
+                date_reversed = sorted(self.service_passwords_time, key=lambda key: self.service_passwords_time[key]['added_on'], reverse=True)
+                # sort service names by 'added_on' & 'reverse'
+                result = []
+                for key in date_reversed:
+                    result.append(key)
+                return result
+                # return key, self.service_passwords_time[key]
             
     def get_for_service(self, service_name):
         # Returns: the password for the given service, or None if none exists
@@ -606,7 +617,7 @@ password_manager.add('makersbnb', '$12345678')
 # print(password_manager.list_services())
 # print(password_manager.sort_services_by('service'))
 # print(password_manager.sort_services_by('service', 'reverse'))
-# print(password_manager.sort_services_by('added_on'))
+print(password_manager.sort_services_by('added_on'))
 
-print(password_manager.testing_1())
-print(password_manager.testing_2())
+# print(password_manager.testing_1())
+# print(password_manager.testing_2())
