@@ -116,13 +116,15 @@ def order_films_chronologically(filename):
 
         return result
 
-data = order_films_chronologically("test.json")
-if data:
-    print(data)
+# data = order_films_chronologically("test.json")
+# if data:
+#     print(data)
 
 
 def order_films_most_recent_first(filename):
-    with open(filename) as my_file: 
+    file_path = 'Makers/Extension_Challenges/' + filename
+
+    with open(file_path) as my_file: 
         movies_list= json.load(my_file)
 
         # extract all years in a list
@@ -142,6 +144,31 @@ def order_films_most_recent_first(filename):
 
         return result
     
-data = order_films_most_recent_first("test.json")
+# data = order_films_most_recent_first("test.json")
+# if data:
+#     print(data)
+
+
+def all_actors_starting_with_letter(filename, letter):
+    file_path = 'Makers/Extension_Challenges/' + filename
+
+    with open(file_path) as my_file: 
+        movies_list= json.load(my_file)
+
+        # extract all actors starting with the specified letter in a list
+        actors = []
+        for movie_dict in movies_list:
+            for actor in movie_dict['stars']:
+                if actor.lower()[0] == letter:
+                    actors.append(actor)
+
+        # sort list chronologically
+        actors = sorted(actors)
+        # remove duplicates
+        actors = list(dict.fromkeys(actors))
+
+        return actors
+
+data = all_actors_starting_with_letter("test.json", 'a')
 if data:
     print(data)
