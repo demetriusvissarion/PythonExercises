@@ -86,6 +86,62 @@ def get_films_within_year_range(filename, start_year, end_year):
     
     return films_within_year_range
 
-data = get_films_within_year_range("test.json", 1994, 1996)
+# data = get_films_within_year_range("test.json", 1994, 1996)
+# if data:
+#     print(data)
+
+
+
+def order_films_chronologically(filename):
+    file_path = 'Makers/Extension_Challenges/' + filename
+    with open(file_path) as my_file: 
+        movies_list= json.load(my_file)
+
+        # extract all years in a list
+        films_years = []
+        for movie_dict in movies_list:
+            films_years.append(movie_dict['year'])
+
+        # sort list chronologically
+        films_years = sorted(films_years)
+
+        # loop throught the list and create new list with film name for each year
+        result = []
+        for year in films_years:
+            for movie_dict in movies_list:
+                if movie_dict['year'] == year:
+                    result.append(movie_dict['name'])
+        
+        print(result)
+
+        return result
+
+data = order_films_chronologically("test.json")
+if data:
+    print(data)
+
+
+def order_films_most_recent_first(filename):
+    with open(filename) as my_file: 
+        movies_list= json.load(my_file)
+
+        # extract all years in a list
+        films_years = []
+        for movie_dict in movies_list:
+            films_years.append(movie_dict['year'])
+
+        # sort list chronologically
+        films_years = sorted(films_years, reverse=True)
+
+        # loop throught the list and create new list with film name for each year
+        result = []
+        for year in films_years:
+            for movie_dict in movies_list:
+                if movie_dict['year'] == year:
+                    result.append(movie_dict['name'])
+
+        return result
+    
+data = order_films_most_recent_first("test.json")
 if data:
     print(data)
