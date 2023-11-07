@@ -69,6 +69,23 @@ def get_films_with_minimum_rating(filename, rating):
     
     return films_by_actor
 
-data = get_films_with_minimum_rating("test.json", 9.3)
+# data = get_films_with_minimum_rating("test.json", 9.3)
+# if data:
+#     print(data)
+
+
+def get_films_within_year_range(filename, start_year, end_year):
+    file_path = 'Makers/Extension_Challenges/' + filename
+    with open(file_path) as my_file: 
+        movies_list= json.load(my_file)
+
+        films_within_year_range = []
+        for movie_dict in movies_list:
+            if movie_dict['year'] in range(start_year, end_year):
+                films_within_year_range.append(movie_dict['name'])
+    
+    return films_within_year_range
+
+data = get_films_within_year_range("test.json", 1994, 1996)
 if data:
     print(data)
