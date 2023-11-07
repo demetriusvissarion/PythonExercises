@@ -160,3 +160,60 @@ def create_march_data(filename):
 
 
 print(create_march_data("Makers/Extension_Challenges/AirQuality.csv"))
+
+
+
+
+def create_monthly_responses(filename):
+    if does_file_exist(filename):
+        directory_path = "Makers/Extension_Challenges/monthly_responses"
+
+        # while WIP delete "monthly_responses" folder & all files inside so I can create it again
+        if os.path.exists(directory_path) and os.path.isdir(directory_path):
+            files = os.listdir(directory_path)
+            for file in files:
+                file_path = os.path.join(directory_path, file)
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+            os.rmdir(directory_path)
+
+        # create a new folder "monthly_responses"
+        path = "Makers/Extension_Challenges/"
+        folder_name = path + "monthly_responses"
+        os.makedirs(folder_name, exist_ok=True)
+
+        # read the input data from "AirQuality.csv"
+        file_path = path + filename
+        with open(file_path, "r") as input_file:
+            data = input_file.readlines()
+
+        # separate the header from the data
+        header = data[0]
+        data = data[1:]
+
+        # create a dictionary to hold data for each month
+        month_data = {}
+
+        # process the data and group it by month
+        for line in data:
+            if line[0] != ';':
+                parts = line.strip().split(";")
+                date_parts = parts[0].split("/")
+                # print(date_parts)
+                month_year = f"{date_parts[1]}-{date_parts[2]}"
+                if month_year not in month_data:
+                    month_data[month_year] = [header]
+                month_data[month_year].append(line)
+        
+        # print(month_data)
+
+        # create a new file for each month
+        for month_year, month_lines in month_data.items():
+            month_folder = os.path.join(folder_name, f"{month_year}.csv")
+            with open(month_folder, "w") as output_file:
+                output_file.writelines(month_lines)
+
+
+print(create_monthly_responses("AirQuality.csv"))
+#   Returns: nothing, but files such as monthly_responses/05-2004.csv exist containing
+#            data matching responses from that month and year
