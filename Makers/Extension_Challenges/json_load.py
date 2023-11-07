@@ -51,6 +51,24 @@ def get_films_by_actor(filename, desired_actor):
     
     return films_by_actor
 
-data = get_films_by_actor("test.json", 'James Caan')
+# data = get_films_by_actor("test.json", 'James Caan')
+# if data:
+#     print(data)
+
+
+
+def get_films_with_minimum_rating(filename, rating):
+    file_path = 'Makers/Extension_Challenges/' + filename
+    with open(file_path) as my_file: 
+        movies_list= json.load(my_file)
+
+        films_by_actor = []
+        for movie_dict in movies_list:
+            if movie_dict['imdb_rating'] >= rating:
+                films_by_actor.append(movie_dict['name'])
+    
+    return films_by_actor
+
+data = get_films_with_minimum_rating("test.json", 9.3)
 if data:
     print(data)
