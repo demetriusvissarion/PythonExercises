@@ -1,0 +1,57 @@
+[
+    {
+        "name": "The Shawshank Redemption",
+        "year": 1994,
+        "imdb_rating": 9.3,
+        "director": "Frank Darabont",
+        "stars": [
+            "Tim Robbins",
+            "Morgan Freeman",
+            "Bob Gunton"
+        ]
+    },
+    {
+        "name": "The Godfather",
+        "year": 1972,
+        "imdb_rating": 9.2,
+        "director": "Francis Ford Coppola",
+        "stars": [
+            "Marlon Brando",
+            "Al Pacino",
+            "James Caan"
+        ]
+    },
+    {
+        "name": "The Dark Knight",
+        "year": 2008,
+        "imdb_rating": 9.0,
+        "director": "Christopher Nolan",
+        "stars": [
+            "Christian Bale",
+            "Heath Ledger",
+            "Aaron Eckhart"
+        ]
+    },
+    {
+        "name": "The Godfather: Part II",
+        "year": 1974,
+        "imdb_rating": 9.0,
+        "director": "Francis Ford Coppola",
+        "stars": [
+            "Al Pacino",
+            "Robert De Niro",
+            "Robert Duvall"
+        ]
+    },
+    {
+        "name": "12 Angry Men",
+        "year": 1957,
+        "imdb_rating": 9.0,
+        "director": "Sidney Lumet",
+        "stars": [
+            "Henry Fonda",
+            "Lee J. Cobb",
+            "Martin Balsam"
+        ]
+    }
+]
