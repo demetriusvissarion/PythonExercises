@@ -1,16 +1,19 @@
 class Solution:
     def removeDuplicates(self, nums) -> int:
-        expectedNums = []
-        for num in nums:
-            if num not in expectedNums:
-                expectedNums.append(num)
-            else:
-                expectedNums.append(30001)
+        # expectedNums = []
+        # for num in nums:
+        #     if num not in expectedNums:
+        #         expectedNums.append(num)
+        #     else:
+        #         expectedNums.append(30001)
 
-        nums[:] = sorted(expectedNums)
-        k = len([element for element in nums if element != 30001])
+        # nums[:] = sorted(expectedNums)
+        # k = len([element for element in nums if element != 30001])
 
-        return k
+        # return k
+
+        nums[:] = sorted(list(set(nums)))
+        return len(nums)
 
 
 solution = Solution()
