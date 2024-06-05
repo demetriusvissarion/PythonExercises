@@ -1,12 +1,25 @@
 class Solution:
     def searchInsert(self, nums, target: int) -> int:
-        if target in nums:
-            return nums.index(target)
-        else:
-            closest_lesser_no = [x for x in nums if x < target]
-            if not closest_lesser_no:
-                return 0
-            return nums.index(max(closest_lesser_no))+1
+        # if target in nums:
+        #     return nums.index(target)
+        # else:
+        #     closest_lesser_no = [x for x in nums if x < target]
+        #     if not closest_lesser_no:
+        #         return 0
+        #     return nums.index(max(closest_lesser_no))+1
+
+        left, right = 0, len(nums) - 1
+
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+
+        return left
 
 
 solution = Solution()
