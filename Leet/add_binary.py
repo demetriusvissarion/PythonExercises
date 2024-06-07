@@ -1,9 +1,6 @@
 class Solution:
     def addBinary(self, a: str, b: str) -> str:
-        dec_a = int(a, 2)
-        dec_b = int(b, 2)
-        dec_sum = dec_a + dec_b
-        return str(bin(dec_sum)[2:])
+        return str(bin(int(a, 2) + int(b, 2))[2:])
 
 
 solution = Solution()
