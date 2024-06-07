@@ -1,11 +1,13 @@
 class Solution:
     def plusOne(self, digits):
-        # list of strings
-        list_of_strings = [str(i) for i in digits]
-        # concatenate strings into one string
-        concatenated_string = "".join(list_of_strings)
-        # turn string into digit and add 1
-        return [int(i) for i in str(int(concatenated_string) + 1)]
+        # # list of strings
+        # list_of_strings = [str(i) for i in digits]
+        # # concatenate strings into one string
+        # concatenated_string = "".join(list_of_strings)
+        # # turn string into digit and add 1
+        # return [int(i) for i in str(int(concatenated_string) + 1)]
+
+        return [int(i) for i in str(int("".join([str(i) for i in digits])) + 1)]
 
 
 solution = Solution()
